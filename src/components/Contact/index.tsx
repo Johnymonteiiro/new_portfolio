@@ -1,89 +1,112 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useContact } from "../../hooks/useContext";
 import { Container, Content, Fields, Form } from "./style";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
 
 export function Contact() {
-  const {
-    name,
-    email,
-    subject,
-    message,
-    handleName,
-    handleEmail,
-    handleSubject,
-    handleMesaage,
-    sendEmail,
-  } = useContact();
+  const { values,errors, handleChange, sendEmail, } = useContact();
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.to(".animateForm", {
-      scrollTrigger: {
-        trigger: ".animateForm",
-        start: "150px 90%",
-        toggleActions: "restart pause none pause",
-      },
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    });
+  const [isName, setIsName] = useState(true);
+  const [isEmail, setIsEmail] = useState(true);
+  const [isSubject, setIsSubject] = useState(true);
+  const [isMessage, setIsMessage] = useState(true);
 
-    gsap.from(".animateForm", {
-      scrollTrigger: {
-        trigger: ".animateForm",
-        start: "150px 100%",
-        toggleActions: "restart pause none pause",
-      },
-      y: -150,
-      opacity: 0,
-      duration: 1,
-    });
-  }, []);
+  useEffect(()=>{
+
+    if(values.name === ""){
+      setIsName(false)
+    } else {
+      setIsName(true)
+    }
+
+    if(values.email === ""){
+      setIsEmail(false)
+    } else {
+      setIsEmail(true)
+    }
+
+    if(values.subject === ""){
+      setIsSubject(false)
+    } else {
+      setIsSubject(true)
+    }
+
+    if(values.message === ""){
+      setIsMessage(false)
+    } else {
+      setIsMessage(true)
+    }
+
+  },[values.email, values.message, values.name, values.subject])
+
 
   return (
     <>
       <Container id="contacts">
         <Content>
           <h1 className="title">Contact</h1>
+          <hr className="title_line" />
           <p className="description">
             Interested in some projects?
             <br />
             Let´s connect via e-mail or linkedin
           </p>
-          <Form onSubmit={sendEmail} className="animateForm">
+          <Form onSubmit={sendEmail} >
             <Fields>
               <div className="input-area">
+                <label> Name:</label>
                 <input
                   type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={name}
-                  onChange={handleName}
+                  name ="name"
+                  placeholder ="Name"
+                  value={values.name}
+                  onChange={handleChange}
                 />
+                {isName ?
+                <>
+                </> : <>
+                {errors.name && <p>{errors.name}</p>}
+                </> }
+                <label>Email:</label>
                 <input
                   type="email"
                   name="email"
-                  placeholder="e-mail"
-                  value={email}
-                  onChange={handleEmail}
+                  placeholder ="e-mail"
+                  value={values.email}
+                  onChange={handleChange}
                 />
+                {isEmail?
+                <>
+                </> : <>
+                {errors.email && <p>{errors.email}</p>}
+                </> }
+                <label>Subject:</label>
                 <input
                   type="text"
                   name="subject"
-                  placeholder="subject"
-                  value={subject}
-                  onChange={handleSubject}
+                  placeholder ="subject"
+                  value={values.subject}
+                  onChange={handleChange}
                 />
+                {isSubject ?
+                <>
+                </> : <>
+                {errors.subject && <p>{errors.subject}</p>}
+                </> }
               </div>
               <div className="text-area">
+              <label>Message:</label>
                 <textarea
                   name="message"
-                  placeholder="let your message"
-                  value={message}
-                  onChange={handleMesaage}
+                  placeholder ="let your message"
+                  value={values.message}
+                  onChange={handleChange}
                 ></textarea>
+                {isMessage ?
+                <>
+                </> : <>
+                 {errors.message && <p>{errors.message}</p>}
+                </> }
+               
               </div>
             </Fields>
             <button type="submit">Send</button>

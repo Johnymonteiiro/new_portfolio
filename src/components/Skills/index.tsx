@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import { skills, tools } from "../../service/api";
+import { skills, tools } from "../../service/data";
 import { Buttons, Card, Container, Content } from "./style";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 interface Types {
   id: number;
   img: string;
@@ -31,38 +28,12 @@ export function Skills() {
     setSkillChange(false);
   }
   
-  useEffect(() => {
-     
-    gsap.registerPlugin(ScrollTrigger)
-     gsap.to(".animateCard",{
-       scrollTrigger:{
-         trigger:".animateCard",
-         start:"100px 100%",
-         toggleActions:"restart pause reverse pause"
-       },
-          y:0,
-          opacity: 1,
-          duration:1 
-     })
-
-     gsap.from(".animateCard",{
-       scrollTrigger:{
-         trigger:".animateCard",
-         start:"100px 90%",
-         toggleActions:"restart pause reverse pause"
-       },
-          y:-100,
-          opacity: 0,
-          duration:1 
-     })
-
-  }, []);
-
   return (
     <>
       <Container id="skills">
         
         <h1 className="title">Skills & Tools</h1>
+        <hr className="title_line" />
         <Buttons>
           <button
             className={skillChange ? "btn" : "disabled-btn"}
@@ -78,7 +49,7 @@ export function Skills() {
           </button>
         </Buttons>
         {skillChange ? (
-          <Content className="animateCard">
+          <Content data-aos="fade-down" data-aos-easing="linear">
             <Card>
               {skill.map((skill) => (
                 <div className="skills" key={skill.id}>
@@ -89,7 +60,7 @@ export function Skills() {
             </Card>
           </Content>
         ) : (
-          <Content className="animateCard">
+          <Content data-aos="fade-down" data-aos-easing="linear">
              <Card>
               {tool.map((skill) => (
                 <div className="skills" key={skill.id}>

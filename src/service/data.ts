@@ -1,4 +1,4 @@
-import { data } from "../utils/db";
+import { data } from "../db/db";
 
 
 export const skills = data.skills;

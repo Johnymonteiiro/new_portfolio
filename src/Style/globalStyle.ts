@@ -21,11 +21,11 @@ export const GlobalStyle = createGlobalStyle`
     --text-size:clamp(1.3rem, 1rem + 2vw, 0.5em );;
     --text-small-size:18px;
     
-    // Color //
+    // Color #41BBFF  #8257E5 #139FED  #04D361 //
 
     --primary-color:#222731;
     --second-color: #E1E1E6;
-    --third-color: #8257E5;
+    --third-color: #139FED;
     --gray-color:#A0A0A0;
     --dark-color: #353941;
     --dark-light: rgba(70, 72, 78, 0.54);
@@ -77,4 +77,12 @@ a {
     text-decoration: none;
 }
 
+.title_line{
+    height: 5px;
+    width: 35%;
+    border: none;
+    margin:10px  auto;
+    background-color:var(--third-color);
+    border-radius:8px;
+}
 `;

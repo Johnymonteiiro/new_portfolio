@@ -1,9 +1,9 @@
 import { Route, Routes, useLocation} from "react-router-dom";
 import { AnimatePresence } from "framer-motion"
-import { About } from "../components/About";
-import { Contact } from "../components/Contact";
-import { Home } from "../components/Home";
-import { Projects } from "../components/Projects";
+import { About } from "../components/about";
+import { Contact } from "../components/contact";
+import { Home } from "../components/home";
+import { Projects } from "../components/projects";
 import { Skills } from "../components/Skills";
 
 

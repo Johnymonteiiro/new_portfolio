@@ -66,6 +66,7 @@ export const Bg = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
+  border-top: 6px solid var(--third-color);
   background: linear-gradient(
     181.17deg,
     rgba(0, 0, 0, 0.79) -3.06%,
@@ -81,21 +82,27 @@ export const Bg = styled.div`
   }
 
   .review {
-    position: relative;
-    left:0;
-    top: 0px;
-    width: 180px;
+    height: auto;
+    width:220px;
     color: var(--second-color);
 
-    .revie-title {
+    .review-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: var(--third-color);
-      padding: 10px 0;
+      padding: 10px;
       text-align: center;
       font-weight: 500;
+
+      .title-project,span{
+        font-size: var(--text-size);
+      }
     }
 
     .technologys {
       margin: 20px 0;
+      padding:0 10px;
 
       .languages {
         display: flex;

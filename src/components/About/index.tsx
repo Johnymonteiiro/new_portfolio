@@ -1,6 +1,7 @@
 import { Container, Content, Img, Info, Social, Link, Bg } from "./style";
 import { FaGithub, FaLinkedin, FaFilePdf } from "react-icons/fa";
 import Picture from "../../assets/about-image.png";
+import { personalData } from "../../db/db";
 
 
 export function About() {
@@ -8,12 +9,14 @@ export function About() {
  
   return (
     <>
-      <Container id="about"
-        data-aos="fade-down"
-        data-aos-easing="linear"
-      >
+      <Container id="about" >
         <h1 className="title">About me</h1>
-        <Content url={Picture} className="animateSection">
+        <hr className="title_line" />
+        <Content 
+        url={Picture}
+         className="animateSection"
+         data-aos="fade-down" data-aos-easing="linear"
+         >
           <Img>
             <img src={Picture} alt="jhony" />
           </Img>
@@ -37,16 +40,16 @@ export function About() {
           <Social>
             <hr className="line" />
             <div className="social">
-              <Link target="_blank" href="https://github.com/Johnymonteiiro">
+              <Link target="_blank" href={personalData.github}>
                 <FaGithub size={30} className="icon" />
               </Link>
               <Link
                 target="_blank"
-                href="https://www.linkedin.com/in/joao-sebastiao/"
+                href={personalData.linkedin}
               >
                 <FaLinkedin size={30} className="icon" />
               </Link>
-              <Link href="http://localhost:3000/Jo%C3%A3oResume.pdf">
+              <Link href={personalData.resume}>
                 <FaFilePdf size={30} className="icon" />
               </Link>
             </div>

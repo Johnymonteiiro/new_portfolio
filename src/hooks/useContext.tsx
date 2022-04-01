@@ -1,115 +1,128 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
-import { userShema } from "../validation/userValidation";
-import { SetStateAction, useState } from "react";
+import { userShema, ValidationFields } from "../validation/userValidation";
+import { useState } from "react";
 
+interface ErrorProps {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+interface ValuesProps {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
 interface ContextProps {
-   name:string,
-   email:string,
-   subject:string,
-   message:string,
-   handleName:(e: { target: { value: SetStateAction<string> } })=> void,
-   handleEmail:(e: { target: { value: SetStateAction<string> } })=> void,
-   handleSubject:(e: { target: { value: SetStateAction<string> } })=> void,
-   handleMesaage:(e: { target: { value: SetStateAction<string> } })=> void,
-   sendEmail:(e: React.FormEvent<HTMLFormElement>)=> void
+  values: ValuesProps;
+  errors: ErrorProps;
+  handleChange: (e: { target: { name: string; value: string } }) => void;
+  sendEmail: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 interface ProviderProps {
-  children:ReactNode;
+  children: ReactNode;
 }
 
 const Contact = createContext<ContextProps>({} as ContextProps);
 
+export function ContactProvider({ children }: ProviderProps) {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
-export function ContactProvider ({children} : ProviderProps) {
+  const resetValues = {
+    name: " ",
+    email: " ",
+    subject: " ",
+    message: " ",
+  };
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [subject, setSubject] = useState("");
-    const [message, setSetMesage] = useState("");
-  
-    function handleName(e: { target: { value: SetStateAction<string> } }) {
-      setName(e.target.value);
+  const [isValid, setIsValid] = useState(false);
+
+  const [errors, setErrors] = useState({} as ErrorProps);
+
+  function handleChange(e: { target: { name: string; value: string } }) {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const emailVerrify = async () => {
+    const isValid = await userShema.isValid(values.email);
+    return isValid;
+  };
+
+  useEffect(() => {
+    if (
+      values.name === "" ||
+      values.email === "" ||
+      values.subject === "" ||
+      values.message === ""
+    ) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
     }
-  
-    function handleEmail(e: { target: { value: SetStateAction<string> } }) {
-      setEmail(e.target.value);
+  }, [values]);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    emailVerrify();
+
+    if (isValid) {
+      emailjs
+        .sendForm(
+          "service_message",
+          "template_m4w7j7g",
+          e.currentTarget,
+          "user_nCOldAK8DviTmu2rFHGFq"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+            toast.success("Your e-mail is sent!'");
+          },
+          (error) => {
+            console.log(error.text);
+            toast.error("Try again later");
+          }
+        );
+
+      e.currentTarget.reset();
+      setValues({
+        ...resetValues,
+      });
+    } else {
+      setErrors(ValidationFields(values));
     }
-  
-    function handleSubject(e: { target: { value: SetStateAction<string> } }) {
-      setSubject(e.target.value);
-    }
-  
-    function handleMesaage(e: { target: { value: SetStateAction<string> } }) {
-      setSetMesage(e.target.value);
-    }
-  
-    const emailVerrify = async () => {
-      const isValid = await userShema.isValid(email);
-      return isValid;
-    };
-  
-    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-        
-      e.preventDefault();
-  
-      emailVerrify();
-  
-      if (name === "" || email === "" || subject === "" || message === "") {
-        toast.error("Fill the empy spaces");
-      } else {
-        emailjs
-          .sendForm(
-            "service_message",
-            "template_m4w7j7g",
-            e.currentTarget,
-            "user_nCOldAK8DviTmu2rFHGFq"
-          )
-          .then(
-            (result) => {
-              console.log(result.text);
-              toast.success("Your e-mail is sent!'");
-            },
-            (error) => {
-              console.log(error.text);
-              toast.error("Try again later");
-            }
-          );
-  
-        e.currentTarget.reset();
-        setName("");
-        setEmail("");
-        setSubject("");
-        setSetMesage("")
-      }
-    };
+  };
 
-
-    return(
-        <Contact.Provider value={{
-            name,
-            email,
-            subject,
-            message,
-            handleName,
-            handleEmail,
-            handleSubject,
-            handleMesaage,
-            sendEmail,
-        }}>
-
-            {children}
-        </Contact.Provider>
-    )
-
+  return (
+    <Contact.Provider
+      value={{
+        handleChange,
+        sendEmail,
+        values,
+        errors,
+      }}
+    >
+      {children}
+    </Contact.Provider>
+  );
 }
 
+export function useContact() {
+  const context = useContext(Contact);
 
-export function useContact (){
-    const context = useContext(Contact);
-
-    return context;
+  return context;
 }

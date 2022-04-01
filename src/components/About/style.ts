@@ -127,6 +127,7 @@ export const Social = styled.div`
     width: 4px;
     border: none;
     background-color: var(--third-color);
+    border-radius:8px;
   }
 
   .social {
@@ -169,6 +170,7 @@ export const Social = styled.div`
     .line {
       height: 4px;
       width: 40%;
+      border-radius:8px;
     }
   }
 `;

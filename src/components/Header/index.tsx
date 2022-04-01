@@ -1,10 +1,10 @@
 import { Container, TopButton, Wrapper } from "./style";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import Logo from "../../assets/logo.svg";
-import { NavBar } from "../NavBar";
+import { NavBar } from "../navBar";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { variante } from "../Animations/animations";
+import { variante } from "../animations/animations";
 
 
 export function Header() {
@@ -57,7 +57,7 @@ export function Header() {
       </Container>
        {top ? (
            <TopButton href="#home">
-           <BsArrowUpSquareFill size={30} color="#8257E5"/>
+           <BsArrowUpSquareFill size={30} color="#139FED"/>
          </TopButton>
        ):(
          <></>

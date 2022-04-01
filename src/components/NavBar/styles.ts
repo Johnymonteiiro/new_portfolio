@@ -51,6 +51,7 @@ export const Container = styled.div`
 
       .nav-menu.active {
         background: var(--dark-color);
+        border-bottom: 8px solid var(--third-color);
         opacity: 1;
         top: 0;
         transition: all 0.8s ease;
@@ -59,11 +60,11 @@ export const Container = styled.div`
 
       .nav-link {
         text-align: center;
-        color: var(--second-color);
+        color: var(--third-color);
         font-weight: 500;
-        font-size: var(--text-size);
+        font-size:25px;
         &:hover {
-          color: var(--third-color);
+          color: var(--second-color);
         }
       }
 

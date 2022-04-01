@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaRegEye, FaGithub } from "react-icons/fa";
 import { SiCodepen } from "react-icons/si";
 import { Link } from "react-router-dom";
-import { projectsData } from "../../service/api";
+import { projectsData } from "../../service/data";
 import { Bg, Card, Container, Content, Info } from "./style";
 
 interface LanguageTypes {
@@ -32,6 +32,7 @@ export function Projects() {
       <Container id="projects">
         <Content>
           <h1 className="title">Projects</h1>
+          <hr className="title_line" />
           <p className="description">
             Digital Products (Aplications, sites and web solutions)
             <br />
@@ -53,11 +54,11 @@ export function Projects() {
                 </div>
                 <Bg>
                   <div className="review">
-                    <div className="revie-title">
+                    <div className="review-title">
                       <span className="number">{project.id}</span>
-                      <span className="title-project">
+                      <p className="title-project">
                         {"." + project.title}
-                      </span>
+                      </p>
                     </div>
                     <div className="technologys">
                       {project.languages.map((language) => (

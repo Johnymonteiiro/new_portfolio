@@ -2,6 +2,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdCopyright } from "react-icons/md";
 import { AiFillInstagram  } from "react-icons/ai";
 import { Contacts, Container, Social, Wrapper } from "./styles";
+import { personalData } from "../../db/db";
 
 export function Footer() {
 
@@ -10,18 +11,18 @@ export function Footer() {
     <Wrapper>
       <Container>
         <Contacts>
-           <p className="phone">+55 85981155875</p>
-           <p className="email">johnymonteiiro@gmail.com</p>
+           <p className="phone">{personalData.number}</p>
+           <p className="email">{personalData.email}</p>
         </Contacts>
         <Social>
           <div className="icons">
-              <a href="https://github.com/Johnymonteiiro">
+              <a href={personalData.github} target="_blank" rel="noreferrer">
                 <FaGithub size={30} className="icon"/>
               </a> 
-              <a href="https://www.linkedin.com/in/joao-sebastiao/">
+              <a href={personalData.linkedin} target="_blank" rel="noreferrer">
                 <FaLinkedin size={30} className="icon"/>
               </a> 
-              <a href="https://www.linkedin.com/in/joao-sebastiao/">
+              <a href={personalData.insta} target="_blank" rel="noreferrer">
                 <AiFillInstagram size={35} className="icon"/>
               </a> 
           </div>

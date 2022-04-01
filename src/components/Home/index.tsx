@@ -2,7 +2,7 @@ import { Bg, Container, Content, Img, Info, Link } from "./style";
 import { MdWavingHand } from "react-icons/md";
 import Picture from "../../assets/home-image.png";
 import { motion } from "framer-motion";
-import { variante } from "../Animations/animations";
+import { variante } from "../animations/animations";
 
 export function Home() {
   return (
