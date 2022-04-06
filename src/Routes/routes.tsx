@@ -13,7 +13,7 @@ export const RoutesLink = () => {
   return (
     <>
     <AnimatePresence exitBeforeEnter>
-      <Routes location={location} key={location.pathname}>
+      <Routes location={location}>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/skills" element={<Skills />} />
@@ -21,7 +21,6 @@ export const RoutesLink = () => {
       <Route path="/contact" element={<Contact />} />
       </Routes>
     </AnimatePresence>
-   
     </>
   );
 };

@@ -1,55 +1,52 @@
+import { useSinglePrismicDocument } from "@prismicio/react";
 import { Container, Content, Img, Info, Social, Link, Bg } from "./style";
 import { FaGithub, FaLinkedin, FaFilePdf } from "react-icons/fa";
-import Picture from "../../assets/about-image.png";
-import { personalData } from "../../db/db";
-
+import { useEffect } from "react";
+import { PrismicText } from "@prismicio/react";
 
 export function About() {
   
- 
+  const [prismic, prismicDoc] = useSinglePrismicDocument("about");
+  const about = prismic?.data;
+
+  useEffect(() => {
+    if (prismicDoc.state === "failed") {
+      console.warn("About session was not found");
+    }
+  }, [prismicDoc.state]);
+
+
   return (
     <>
-      <Container id="about" >
-        <h1 className="title">About me</h1>
+      <Container id="about">
+        <h1 className="title">{about?.title}</h1>
         <hr className="title_line" />
-        <Content 
-        url={Picture}
-         className="animateSection"
-         data-aos="fade-down" data-aos-easing="linear"
-         >
+        <Content
+          url={about?.image.url}
+          className="animateSection"
+          data-aos="fade-down"
+          data-aos-easing="linear"
+        >
           <Img>
-            <img src={Picture} alt="jhony" />
+            <img src={about?.image.url} alt="jhony" />
           </Img>
           <Info>
             <div className="about">
               <p className="description">
-                Make yourself home, I`m Jhony Monteiro front-end developer. I`ve
-                got experience with Html5, Css3 and <span>Javascript</span>,
-                <span>Typescript</span>
-                languages. Now I`m working with <span>React.js</span>and{" "}
-                <span>Next.js</span>mostly projects that I`ve built.
-                <br />
-                I`m social one, open to talk and bring new ideias, work as time
-                with my workmates. I like to learn things that make me growth as
-                profissional, I`m in love with technology, music and football.
-                <br /> I only need one chance to prove my skills and I promise,
-                you will not get disaponted.
+                <PrismicText field={about?.content} />
               </p>
             </div>
           </Info>
           <Social>
             <hr className="line" />
             <div className="social">
-              <Link target="_blank" href={personalData.github}>
+              <Link target="_blank" href={about?.github.url}>
                 <FaGithub size={30} className="icon" />
               </Link>
-              <Link
-                target="_blank"
-                href={personalData.linkedin}
-              >
+              <Link target="_blank" href={about?.linkedin.url}>
                 <FaLinkedin size={30} className="icon" />
               </Link>
-              <Link href={personalData.resume}>
+              <Link href={about?.resume.url}>
                 <FaFilePdf size={30} className="icon" />
               </Link>
             </div>

@@ -7,6 +7,7 @@ import { ContactProvider } from "../hooks/useContext";
 import { RoutesLink } from "../routes/routes";
 import Aos from "aos";
 import 'aos/dist/aos.css'
+import { Home } from "../components/home";
 
 export function Main() {
 
@@ -18,6 +19,7 @@ export function Main() {
     <>
       <ContactProvider>
         <RoutesLink />
+        <Home/>
         <About />
         <Skills />
         <Projects />

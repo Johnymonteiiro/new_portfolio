@@ -1,31 +1,55 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { FaRegEye, FaGithub } from "react-icons/fa";
 import { SiCodepen } from "react-icons/si";
 import { Link } from "react-router-dom";
-import { projectsData } from "../../service/data";
+import { useAllPrismicDocumentsByType } from "@prismicio/react";
 import { Bg, Card, Container, Content, Info } from "./style";
 
-interface LanguageTypes {
+interface Technology {
   id: number;
-  name: string;
+  technology: string;
 }
 
-interface Types {
-  id: number;
-  img: string;
-  title: string;
-  github: string;
-  link: string;
-  languages: LanguageTypes[];
-}
+type ProjectTypes =
+  | {
+      id: string;
+      title: string;
+      data: {
+        banner: string;
+        technology: Technology[];
+        preview: string;
+        repository: string;
+      };
+    }[]
+  | undefined;
 
 export function Projects() {
-  const data = projectsData;
-  const [projects, setProjects] = useState<Types[]>([]);
+  const [prismic, prismicDoc] = useAllPrismicDocumentsByType("posts");
+  const [projects, setProjects] = useState<ProjectTypes>([] as ProjectTypes);
+
+  const newprojects = prismic?.map((prismic) => {
+    return {
+      id: prismic.id,
+      title: prismic.data.title.map((title: { text: string }) => title.text),
+
+      data: {
+        banner: prismic.data.banner.url,
+        technology: prismic.data.info,
+        preview: prismic.data.preview.url,
+        repository: prismic.data.repository.url,
+      },
+    };
+  });
 
   useEffect(() => {
-    setProjects(data);
-  }, [data]);
+    if (prismicDoc.state === "failed") {
+      console.warn(
+        "Blog post document was not found. Make sure it exists in your Prismic repository"
+      );
+    }
+    setProjects(newprojects);
+  }, [prismicDoc.state]);
 
   return (
     <>
@@ -39,32 +63,39 @@ export function Projects() {
             responsive, visually pleasing, user-centric and easy to use
           </p>
           <Card>
-            {projects.map((project) => (
+            {projects?.map((project) => (
               <Info key={project.id}>
                 <Link to="/">
-                  <img src={project.img} alt={project.title} />
+                  <img src={project.data.banner} alt={project.title} />
                 </Link>
                 <div className="btn-area">
-                    <a target="_blank" href={project.link} className="btn" rel="noreferrer">
-                      <FaRegEye size={20} />
-                    </a>
-                    <a target="_blank" href={project.github} className="btn" rel="noreferrer">
-                       <FaGithub size={20} />
-                    </a>
+                  <a
+                    target="_blank"
+                    href={project.data.preview}
+                    className="btn"
+                    rel="noreferrer"
+                  >
+                    <FaRegEye size={20} />
+                  </a>
+                  <a
+                    target="_blank"
+                    href={project.data.repository}
+                    className="btn"
+                    rel="noreferrer"
+                  >
+                    <FaGithub size={20} />
+                  </a>
                 </div>
                 <Bg>
                   <div className="review">
                     <div className="review-title">
-                      <span className="number">{project.id}</span>
-                      <p className="title-project">
-                        {"." + project.title}
-                      </p>
+                      <p className="title-project">{project.title}</p>
                     </div>
                     <div className="technologys">
-                      {project.languages.map((language) => (
-                        <div key={language.id} className="languages">
+                      {project.data.technology.map((tech) => (
+                        <div key={tech.technology} className="languages">
                           <SiCodepen size={20} className="icon" />
-                          <p>{language.name}</p>
+                          <p>{tech.technology}</p>
                         </div>
                       ))}
                     </div>

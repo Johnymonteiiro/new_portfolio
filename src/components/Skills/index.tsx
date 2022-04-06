@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
-import { skills, tools } from "../../service/data";
+import { useSinglePrismicDocument } from "@prismicio/react";
 import { Buttons, Card, Container, Content } from "./style";
 interface Types {
   id: number;
-  img: string;
-  name: string;
+  image: {
+    url: string;
+  };
+  title: string;
 }
 
 export function Skills() {
-  const skillData = skills;
-  const toolData = tools;
+  const [prismic, prismicDoc] = useSinglePrismicDocument("skills_tools");
+  const hability = prismic?.data;
 
-  const [skillChange, setSkillChange] = useState(true);
-  const [skill, setSkill] = useState<Types[]>([]);
-  const [tool, setTool] = useState<Types[]>([]);
+  const skills = hability?.skills;
+
+  const tools = hability?.tools;
 
   useEffect(() => {
-    setSkill(skillData);
-    setTool(toolData);
-  }, [skillData, toolData]);
+    if (prismicDoc.state === "failed") {
+      console.warn("About session was not found");
+    }
+  }, [prismicDoc.state]);
+
+  const [skillChange, setSkillChange] = useState(true);
 
   function handleSkillChange() {
     setSkillChange(true);
@@ -27,11 +32,10 @@ export function Skills() {
   function handleToolChange() {
     setSkillChange(false);
   }
-  
+
   return (
     <>
       <Container id="skills">
-        
         <h1 className="title">Skills & Tools</h1>
         <hr className="title_line" />
         <Buttons>
@@ -51,21 +55,21 @@ export function Skills() {
         {skillChange ? (
           <Content data-aos="fade-down" data-aos-easing="linear">
             <Card>
-              {skill.map((skill) => (
-                <div className="skills" key={skill.id}>
-                  <img src={skill.img} alt={skill.name} />
-                  <p className="name">{skill.name}</p>
+              {skills?.map((skill: Types) => (
+                <div className="skills" key={skill.title}>
+                  <img src={skill.image.url} alt={skill.title} />
+                  <p className="name">{skill.title}</p>
                 </div>
               ))}
             </Card>
           </Content>
         ) : (
           <Content data-aos="fade-down" data-aos-easing="linear">
-             <Card>
-              {tool.map((skill) => (
-                <div className="skills" key={skill.id}>
-                  <img src={skill.img} alt={skill.name} />
-                  <p className="name">{skill.name}</p>
+            <Card>
+              {tools.map((tool: Types) => (
+                <div className="skills" key={tool.title}>
+                  <img src={tool.image.url} alt={tool.title} />
+                  <p className="name">{tool.title}</p>
                 </div>
               ))}
             </Card>

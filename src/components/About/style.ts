@@ -75,6 +75,7 @@ export const Info = styled.div`
     font-size: var(--text-size);
     line-height: 35px;
     width: 90%;
+    
   }
 
   span {
