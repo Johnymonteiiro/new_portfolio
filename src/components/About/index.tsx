@@ -18,8 +18,8 @@ export function About() {
 
   return (
     <>
-      <Container id="about">
-        <h1 className="title">{about?.title}</h1>
+      <Container>
+        <h1 className="title" id="about">{about?.title}</h1>
         <hr className="title_line" />
         <Content
           url={about?.image.url}

@@ -6,10 +6,9 @@ interface ContentType {
 
 export const Container = styled.div`
   max-width: 1170px;
-  height:100vh;
-  margin: 0 auto;
+  height:100%;
+  margin: 80px auto;
   padding: 0 20px;
-  margin-top: 80px;
 
   @media only screen and (max-width: 908px) {
     height: auto;
@@ -35,7 +34,7 @@ export const Bg = styled.div`
 
 export const Content = styled.div<ContentType>`
   position: relative;
-  top: 60px;
+  top:0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -71,6 +70,7 @@ export const Info = styled.div`
   flex: 1.08;
   height: 30vh;
   z-index: 100;
+  margin-top:-50px;
 
   .greeting {
     display: flex;

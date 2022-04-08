@@ -6,9 +6,10 @@ interface ContentType {
 
 export const Container = styled.div`
   max-width: 1170px;
-  height: 80vh;
+  height:100%;
   margin: 0 auto;
   padding: 0 20px;
+   border: 2px solid red;
 
   .title {
     
@@ -35,11 +36,11 @@ export const Bg = styled.div`
 
 export const Content = styled.div<ContentType>`
   position: relative;
-  top: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
+  border: 2px solid blue;
 
   @media only screen and (max-width: 908px) {
     flex-direction: column;

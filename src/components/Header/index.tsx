@@ -1,10 +1,10 @@
 import { Container, TopButton, Wrapper } from "./style";
 import { BsArrowUpSquareFill } from "react-icons/bs";
 import Logo from "../../assets/logo.svg";
-import { NavBar } from "../navBar";
+import { NavBar } from "../NavBar";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { variante } from "../animations/animations";
+import { variante } from "../Animations/animations";
 
 
 export function Header() {

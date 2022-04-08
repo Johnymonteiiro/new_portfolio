@@ -5,7 +5,7 @@ import { MenuItems } from "./menuItems";
 import { VscChromeClose } from "react-icons/vsc";
 import { BiMenuAltRight } from "react-icons/bi";
 import { motion } from "framer-motion";
-import { variante } from "../animations/animations";
+import { variante } from "../Animations/animations";
 
 export function NavBar() {
   const [ismobile, setIsMobile] = useState(false);

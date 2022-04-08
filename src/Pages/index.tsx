@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import { About } from "../components/about";
-import { Contact } from "../components/contact";
-import { Projects } from "../components/projects";
+import { About } from "../components/About";
+import { Contact } from "../components/Contact";
+import { Projects } from "../components/Projects";
 import { Skills } from "../components/Skills";
 import { ContactProvider } from "../hooks/useContext";
-import { RoutesLink } from "../routes/routes";
+import { RoutesLink } from "../Routes/routes";
 import Aos from "aos";
-import 'aos/dist/aos.css'
-import { Home } from "../components/home";
+import 'aos/dist/aos.css';
 
 export function Main() {
 
@@ -19,7 +18,6 @@ export function Main() {
     <>
       <ContactProvider>
         <RoutesLink />
-        <Home/>
         <About />
         <Skills />
         <Projects />
