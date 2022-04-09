@@ -4,7 +4,7 @@ export const Container = styled.div`
   max-width: 1170px;
   margin: 0 auto;
   padding: 50px 20px;
-  height: 75vh;
+  height: 100%;
 
   @media only screen and (max-width: 820px) {
     height: auto;
@@ -12,6 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  margin-top:-50px;
   .title {
     text-align: center;
     color: var(--second-color);

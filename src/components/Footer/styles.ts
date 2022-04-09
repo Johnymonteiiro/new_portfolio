@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  
   max-width: 1170px;
   margin: 0 auto;
   padding: 40px 20px;
-
 
   display: flex;
   align-items: center;

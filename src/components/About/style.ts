@@ -9,7 +9,7 @@ export const Container = styled.div`
   height:100%;
   margin: 0 auto;
   padding: 0 20px;
-   border: 2px solid red;
+  margin-bottom: 50px;
 
   .title {
     
@@ -40,7 +40,6 @@ export const Content = styled.div<ContentType>`
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  border: 2px solid blue;
 
   @media only screen and (max-width: 908px) {
     flex-direction: column;

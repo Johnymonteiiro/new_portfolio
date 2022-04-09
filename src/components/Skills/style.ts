@@ -7,7 +7,6 @@ export const Container = styled(motion.div)`
     max-width: 1170px;
     margin:0 auto;
     padding:50px 20px;
-    height: 70vh;
 
     .title{
         text-align: center;
@@ -23,7 +22,7 @@ export const Container = styled(motion.div)`
 `;
 
 export const Content = styled(motion.div)`
-
+    
    .skills{
 
        text-align: center;

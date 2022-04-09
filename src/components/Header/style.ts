@@ -12,6 +12,7 @@ export const Wrapper = styled.header<HeaderTypes>`
   position: fixed;
   z-index: 1500;
   transition: all 0.8s ease-in-out;
+  border-bottom: ${props => props.changeBackgound ? "2px solid var(--third-color)" : "none"};
   filter: ${props => props.changeBackgound ? "blur(-2px)" : "blur(0px)"};
   background:${props => props.changeBackgound ? "var(--dark-color)":"trasparent"}; 
 `;
