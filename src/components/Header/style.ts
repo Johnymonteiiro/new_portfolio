@@ -6,7 +6,7 @@ interface HeaderTypes {
 
 export const Wrapper = styled.header<HeaderTypes>`
   width: 100%;
-  height: 100px;
+  height: 60px;
   padding: 30px 0;
   margin-top: -84px;
   position: fixed;
@@ -21,6 +21,7 @@ export const Container = styled.div`
   max-width: 1170px;
   margin: 0 auto;
   padding: 0 20px;
+  margin-top:-20px;
 
   display: flex;
   justify-content: space-between;
@@ -45,9 +46,9 @@ export const Container = styled.div`
 `;
 
 export const TopButton = styled.a`
-position: absolute;
-bottom:-78.5vh;
-left: 88%;
+position:fixed;
+bottom:24.5vh;
+left:91%;
 color: white;
 border-radius:10%;
 transition: all .4s ease-in-out;

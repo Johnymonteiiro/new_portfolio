@@ -6,9 +6,16 @@ interface ContentType {
 
 export const Container = styled.div`
   max-width: 1170px;
-  height:100%;
   margin: 80px auto;
   padding: 0 20px;
+
+  @media only screen and (max-width: 2560px) {
+    height: 100vh;
+  }
+
+  // @media only screen and (max-width: 1440px) {
+  //   height: 100vh;
+  // }
 
   @media only screen and (max-width: 908px) {
     height: auto;

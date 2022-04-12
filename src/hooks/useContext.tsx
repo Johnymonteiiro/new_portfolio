@@ -32,22 +32,11 @@ interface ProviderProps {
 const Contact = createContext<ContextProps>({} as ContextProps);
 
 export function ContactProvider({ children }: ProviderProps) {
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [values, setValues] = useState({ name: "", email: "", subject: "", message: "",});
 
-  const resetValues = {
-    name: " ",
-    email: " ",
-    subject: " ",
-    message: " ",
-  };
+  const resetValues = { name:"", email:"", subject:"", message:"", };
 
   const [isValid, setIsValid] = useState(false);
-
   const [errors, setErrors] = useState({} as ErrorProps);
 
   function handleChange(e: { target: { name: string; value: string } }) {
@@ -57,8 +46,15 @@ export function ContactProvider({ children }: ProviderProps) {
     });
   }
 
-  const emailVerrify = async () => {
-    const isValid = await userShema.isValid(values.email);
+  const dataFields = {
+    name: values.name,
+    email:values.email,
+    subject: values.subject,
+    message: values.message
+  }
+
+  const fieldVerrify = async () => {
+    const isValid = await userShema.isValid(dataFields);
     return isValid;
   };
 
@@ -77,7 +73,7 @@ export function ContactProvider({ children }: ProviderProps) {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailVerrify();
+    fieldVerrify();
 
     if (isValid) {
       emailjs
@@ -123,6 +119,5 @@ export function ContactProvider({ children }: ProviderProps) {
 
 export function useContact() {
   const context = useContext(Contact);
-
   return context;
 }
