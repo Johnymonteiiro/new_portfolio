@@ -45,7 +45,7 @@ export function Home() {
               }}
             >
               Front-end developer
-              <br />& UI Designer
+              <br />& UI Designer Pro
             </motion.h1>
             <motion.p
               className="description"

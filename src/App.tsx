@@ -1,6 +1,6 @@
 import { BrowserRouter, Link  } from "react-router-dom";
 import { Header } from "./components/Header";
-import { GlobalStyle } from "./Style/globalStyle";
+import { GlobalStyle } from "./style/globalStyle";
 import { ToastContainer } from "react-toastify";
 import { ContactProvider } from "./hooks/useContext";
 import { Main } from "./Pages";
