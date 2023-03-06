@@ -4,9 +4,10 @@ import { Contact } from "../components/Contact";
 import { Projects } from "../components/Projects";
 import { Skills } from "../components/Skills";
 import { ContactProvider } from "../hooks/useContext";
-import { RoutesLink } from "../Routes/routes";
+
 import Aos from "aos";
 import 'aos/dist/aos.css';
+import { RoutesLink } from "../routes/routes";
 
 export function Main() {
 

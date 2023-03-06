@@ -3,10 +3,11 @@ import { Header } from "./components/Header";
 import { GlobalStyle } from "./style/globalStyle";
 import { ToastContainer } from "react-toastify";
 import { ContactProvider } from "./hooks/useContext";
-import { Main } from "./Pages";
+
 import { Footer } from "./components/Footer";
 import { PrismicProvider } from "@prismicio/react";
 import { prismicClient } from "./service/prismic";
+import { Main } from "./pages";
 
 
 export function App() {
